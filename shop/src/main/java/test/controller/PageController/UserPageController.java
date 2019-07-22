@@ -12,7 +12,7 @@ import test.service.impl.UserServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/userPage")
 public class UserPageController {
 
     @Autowired

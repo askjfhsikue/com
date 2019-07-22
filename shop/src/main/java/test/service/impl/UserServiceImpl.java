@@ -13,12 +13,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(TUser tUser){
-        TUser tUser1=tUserMapper.selectByName(tUser.getUserName());
-        if(tUser1==null){
+
+        if(tUserMapper.selectByName(tUser.getUserName())==null){
             tUserMapper.insert(tUser);
             return true;
         }else {
             return false;
         }
     }
+
+    @Override
+    public boolean checkLogin(String userName,String password){
+        TUser tUser1=tUserMapper.selectByName(userName);
+        if(tUser1==null){
+            return false;
+        }else {
+            if(password.equals(tUser1.getPassword())){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
+
 }
