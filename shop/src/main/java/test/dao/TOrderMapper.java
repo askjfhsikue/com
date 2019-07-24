@@ -1,29 +1,23 @@
 package test.dao;
 
-import java.util.List;
-
 import test.entity.TOrder;
 
+import java.util.List;
+
 public interface TOrderMapper {
-    int countByExample(int example);
+    boolean deleteByPrimaryKey(Integer orderId);
 
-    int deleteByExample(int example);
-
-    int deleteByPrimaryKey(Integer orderId);
-
-    int insert(TOrder record);
+    boolean insert(TOrder record);
 
     int insertSelective(TOrder record);
 
-    List<TOrder> selectByExample(int example);
-
     TOrder selectByPrimaryKey(Integer orderId);
 
-//    int updateByExampleSelective(@Param("record") TOrder record, @Param("example")   example);
-//
-//    int updateByExample(@Param("record") TOrder record, @Param("example")   example);
+    TOrder selectByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(TOrder record);
 
     int updateByPrimaryKey(TOrder record);
+
+    List<TOrder> selectAllOrder();
 }

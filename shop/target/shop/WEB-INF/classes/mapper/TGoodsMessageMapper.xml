@@ -1,175 +1,48 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="test.dao.TGoodsMessageMapper" >
-  <resultMap id="BaseResultMap" type="test.entity.TGoodsMessage" >
-    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="goods_state" property="goodsState" jdbcType="VARCHAR" />
-    <result column="variety" property="variety" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DOUBLE" />
-    <result column="picture" property="picture" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.dao.TGoodsMessageMapper">
+  <resultMap id="BaseResultMap" type="test.entity.TGoodsMessage">
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="variety" jdbcType="VARCHAR" property="variety" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    goods_id, goods_state, variety, price, picture
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="test.entity.TGoodsMessage" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_goods_message
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="test.entity.TGoodsMessage" >
-    delete from t_goods_message
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="test.entity.TGoodsMessage" >
-    insert into t_goods_message (goods_id, goods_state, variety, 
-      price, picture)
-    values (#{goodsId,jdbcType=INTEGER}, #{goodsState,jdbcType=VARCHAR}, #{variety,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DOUBLE}, #{picture,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="test.entity.TGoodsMessage">
+    insert into t_goods_message (goods_id, variety, price, 
+      picture)
+    values (#{goodsId,jdbcType=INTEGER}, #{variety,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{picture,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="test.entity.TGoodsMessage" >
+  <insert id="insertSelective" parameterType="test.entity.TGoodsMessage">
     insert into t_goods_message
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
         goods_id,
       </if>
-      <if test="goodsState != null" >
-        goods_state,
-      </if>
-      <if test="variety != null" >
+      <if test="variety != null">
         variety,
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         price,
       </if>
-      <if test="picture != null" >
+      <if test="picture != null">
         picture,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
         #{goodsId,jdbcType=INTEGER},
       </if>
-      <if test="goodsState != null" >
-        #{goodsState,jdbcType=VARCHAR},
-      </if>
-      <if test="variety != null" >
+      <if test="variety != null">
         #{variety,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
+      <if test="price != null">
         #{price,jdbcType=DOUBLE},
       </if>
-      <if test="picture != null" >
+      <if test="picture != null">
         #{picture,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="test.entity.TGoodsMessage" resultType="java.lang.Integer" >
-    select count(*) from t_goods_message
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update t_goods_message
-    <set >
-      <if test="record.goodsId != null" >
-        goods_id = #{record.goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsState != null" >
-        goods_state = #{record.goodsState,jdbcType=VARCHAR},
-      </if>
-      <if test="record.variety != null" >
-        variety = #{record.variety,jdbcType=VARCHAR},
-      </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=DOUBLE},
-      </if>
-      <if test="record.picture != null" >
-        picture = #{record.picture,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update t_goods_message
-    set goods_id = #{record.goodsId,jdbcType=INTEGER},
-      goods_state = #{record.goodsState,jdbcType=VARCHAR},
-      variety = #{record.variety,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DOUBLE},
-      picture = #{record.picture,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+
 </mapper>

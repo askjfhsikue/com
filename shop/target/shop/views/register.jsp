@@ -20,5 +20,12 @@
     <input type="password" name="password"><br>
     <input type="submit">
 </form>
+<div class="form-group">
+    <div class="input-icon">
+        <i class="fa fa-picture-o"></i>
+        <input class="form-control" id="verifyCode" name="verifyCode" placeholder="验证码" maxlength="4">
+        <img src="${pageContext.request.contextPath }/user/getVerifyCode" width="110" height="34" id="verifyCodeImage" onclick="javascript:changeImage();">
+    </div>
+</div>
 </body>
 </html>

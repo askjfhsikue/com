@@ -7,6 +7,8 @@ public class TUser {
 
     private String password;
 
+    private Integer power;
+
     public Integer getUserId() {
         return userId;
     }
@@ -29,5 +31,13 @@ public class TUser {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public Integer getPower() {
+        return power;
+    }
+
+    public void setPower(Integer power) {
+        this.power = power;
     }
 }

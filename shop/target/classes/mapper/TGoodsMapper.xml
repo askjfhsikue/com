@@ -1,181 +1,84 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="test.dao.TGoodsMapper" >
-  <resultMap id="BaseResultMap" type="test.entity.TGoods" >
-    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="store_id" property="storeId" jdbcType="INTEGER" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.dao.TGoodsMapper">
+  <resultMap id="BaseResultMap" type="test.entity.TGoods">
+    <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_state" jdbcType="INTEGER" property="goodsState" />
+    <result column="stock" jdbcType="DOUBLE" property="stock" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
+  <sql id="Base_Column_List">
+    goods_id, goods_name, goods_state, stock
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    goods_id, goods_name, store_id
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="test.entity.TGoods" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_goods
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_goods
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_goods
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="test.entity.TGoods" >
-    delete from t_goods
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="test.entity.TGoods" >
-    insert into t_goods (goods_id, goods_name, store_id
-      )
-    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="test.entity.TGoods">
+    insert into t_goods (goods_id, goods_name, goods_state, 
+      stock)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsState,jdbcType=INTEGER}, 
+      #{stock,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="test.entity.TGoods" >
+  <insert id="insertSelective" parameterType="test.entity.TGoods">
     insert into t_goods
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
         goods_id,
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name,
       </if>
-      <if test="storeId != null" >
-        store_id,
+      <if test="goodsState != null">
+        goods_state,
+      </if>
+      <if test="stock != null">
+        stock,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="goodsId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
         #{goodsId,jdbcType=INTEGER},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="storeId != null" >
-        #{storeId,jdbcType=INTEGER},
+      <if test="goodsState != null">
+        #{goodsState,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="test.entity.TGoods" resultType="java.lang.Integer" >
-    select count(*) from t_goods
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByPrimaryKeySelective" parameterType="test.entity.TGoods">
     update t_goods
-    <set >
-      <if test="record.goodsId != null" >
-        goods_id = #{record.goodsId,jdbcType=INTEGER},
-      </if>
-      <if test="record.goodsName != null" >
-        goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.storeId != null" >
-        store_id = #{record.storeId,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update t_goods
-    set goods_id = #{record.goodsId,jdbcType=INTEGER},
-      goods_name = #{record.goodsName,jdbcType=VARCHAR},
-      store_id = #{record.storeId,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="test.entity.TGoods" >
-    update t_goods
-    <set >
-      <if test="goodsName != null" >
+    <set>
+      <if test="goodsName != null">
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="storeId != null" >
-        store_id = #{storeId,jdbcType=INTEGER},
+      <if test="goodsState != null">
+        goods_state = #{goodsState,jdbcType=INTEGER},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=DOUBLE},
       </if>
     </set>
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="test.entity.TGoods" >
+  <update id="updateByPrimaryKey" parameterType="test.entity.TGoods">
     update t_goods
     set goods_name = #{goodsName,jdbcType=VARCHAR},
-      store_id = #{storeId,jdbcType=INTEGER}
+      goods_state = #{goodsState,jdbcType=INTEGER},
+      stock = #{stock,jdbcType=DOUBLE}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
+
+
 </mapper>

@@ -5,7 +5,9 @@ public class TGoods {
 
     private String goodsName;
 
-    private Integer storeId;
+    private Integer goodsState;
+
+    private Double stock;
 
     public Integer getGoodsId() {
         return goodsId;
@@ -23,11 +25,19 @@ public class TGoods {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
-    public Integer getStoreId() {
-        return storeId;
+    public Integer getGoodsState() {
+        return goodsState;
     }
 
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
+    public void setGoodsState(Integer goodsState) {
+        this.goodsState = goodsState;
+    }
+
+    public Double getStock() {
+        return stock;
+    }
+
+    public void setStock(Double stock) {
+        this.stock = stock;
     }
 }

@@ -20,10 +20,10 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <%
-        String path = request.getContextPath();
-        String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    %>
+        <%
+            String path = request.getContextPath();
+            String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+        %>
 
     <link rel="icon" type="image/png" href="<%=basePath%>views/assets/i/book.png">
     <link rel="stylesheet" href="<%=basePath%>views/assets/css/amazeui.min.css">
@@ -58,8 +58,8 @@
         <br>
         <br>
 
-        <%--        <img src="<%=basePath%>views/assets/i/tittle-1.png" style="align-content: center;"><br> <br>--%>
-        <%--        <img src="<%=basePath%>views/assets/i/tittle-2.PNG" style="align-content: center;">--%>
+<%--        <img src="<%=basePath%>views/assets/i/tittle-1.png" style="align-content: center;"><br> <br>--%>
+<%--        <img src="<%=basePath%>views/assets/i/tittle-2.PNG" style="align-content: center;">--%>
     </div>
 
 </div>
@@ -75,6 +75,8 @@
             <br>
             <label for="password">密码:</label>
             <input required type="password" name="password" id="password" value="">
+            <input class="form-control" id="verifyCode" name="verifyCode" placeholder="验证码" maxlength="4">
+            <img src="${pageContext.request.contextPath }/user/getVerifyCode" width="110" height="34" id="verifyCodeImage">
             <br>
             <br>
             <div class="am-cf">
@@ -95,14 +97,16 @@
     $("#login").click(function () {
         var username = $("#username")[0].value;
         var password = $("#password")[0].value;
+        var verifyCode = $("#verifyCode")[0].value;
 
-        if (username != "" && password != "") {
+        if (username != "" && password != ""&&verifyCode!="") {
 
             console.log(username + " : " + password);
 
             var json_data = {
                 "username": username,
-                "password": password
+                "password": password,
+                "verifyCode":verifyCode
             };
 
             //js对象转换成JSON字符串
@@ -122,7 +126,7 @@
                     console.log(data.state);
 
                     if (data.state == true) {
-                        window.location.href = "/user/test";
+                            window.location.href = "/user/test";
                     } else {
                         alert(data.message);
                     }

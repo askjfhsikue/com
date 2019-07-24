@@ -2,8 +2,11 @@ package test.service;
 
 import test.entity.TUser;
 
-public interface UserService {
-    boolean register(TUser tUser);
-    boolean checkLogin(String userName,String password);
+import java.util.Map;
 
+public interface UserService {
+    boolean checkLogin(String userName,String password);
+    TUser selectByName(String username);
+    Map<String,Object> checkLogin(TUser tUser);
+    boolean register(TUser tUser);
 }

@@ -3,8 +3,6 @@ package test.entity;
 public class TGoodsMessage {
     private Integer goodsId;
 
-    private String goodsState;
-
     private String variety;
 
     private Double price;
@@ -17,14 +15,6 @@ public class TGoodsMessage {
 
     public void setGoodsId(Integer goodsId) {
         this.goodsId = goodsId;
-    }
-
-    public String getGoodsState() {
-        return goodsState;
-    }
-
-    public void setGoodsState(String goodsState) {
-        this.goodsState = goodsState == null ? null : goodsState.trim();
     }
 
     public String getVariety() {
