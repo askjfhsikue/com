@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    //修改权限
+    @Override
+    public boolean changePermissions(Integer userId,Integer power){
+        return tUserMapper.updatePower(userId,power);
+    }
+
 
     @Override
     public Map<String,Object> checkLogin(TUser tUser){

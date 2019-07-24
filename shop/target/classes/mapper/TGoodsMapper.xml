@@ -7,6 +7,7 @@
     <result column="goods_state" jdbcType="INTEGER" property="goodsState" />
     <result column="stock" jdbcType="DOUBLE" property="stock" />
   </resultMap>
+
   <sql id="Base_Column_List">
     goods_id, goods_name, goods_state, stock
   </sql>
@@ -21,9 +22,9 @@
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="test.entity.TGoods">
-    insert into t_goods (goods_id, goods_name, goods_state, 
+    insert into t_goods ( goods_name, goods_state,
       stock)
-    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsState,jdbcType=INTEGER}, 
+    values ( #{goodsName,jdbcType=VARCHAR}, #{goodsState,jdbcType=INTEGER},
       #{stock,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="test.entity.TGoods">
@@ -80,5 +81,11 @@
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
 
+  <!--expand-->
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete g,tgm from t_goods g LEFT JOIN t_goods_message tgm
+        on g.goods_id=tgm.goods_id
+    WHERE g.goods_id=#{goodsId,jdbcType=INTEGER}
+  </delete>
 
 </mapper>

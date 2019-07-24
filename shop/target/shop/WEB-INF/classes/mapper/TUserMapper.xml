@@ -82,6 +82,10 @@
   <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
     select *
     from t_user
-    where user_name=#{user_name,jdbcType=INTEGER}
+    where user_name=#{user_name,jdbcType=VARCHAR}
   </select>
+  <update id="updatePower" parameterType="java.lang.Integer">
+    update t_user set power=#{power,jdbcType=INTEGER}
+    where user_id=#{userId,jdbcType=INTEGER}
+  </update>
 </mapper>

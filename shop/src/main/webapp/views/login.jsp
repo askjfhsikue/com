@@ -76,7 +76,7 @@
             <label for="password">密码:</label>
             <input required type="password" name="password" id="password" value="">
             <input class="form-control" id="verifyCode" name="verifyCode" placeholder="验证码" maxlength="4">
-            <img src="${pageContext.request.contextPath }/user/getVerifyCode" width="110" height="34" id="verifyCodeImage">
+            <img src="${pageContext.request.contextPath }/verifyCode/getVerifyCode" width="110" height="34" id="verifyCodeImage">
             <br>
             <br>
             <div class="am-cf">
