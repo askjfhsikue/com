@@ -6,7 +6,9 @@ import test.entity.TGoodsMessage;
 public interface TGoodsMessageMapper {
     int insert(TGoodsMessage record);
 
-    int insertSelective(TGoodsMessage record);
+    boolean insertSelective(TGoodsMessage record);
 
-    TGoodsMessage selectByIdL(Integer goodsId);
+    TGoodsMessage selectById(Integer goodsId);
+
+    boolean deleteMessageById(Integer goodsId);
 }

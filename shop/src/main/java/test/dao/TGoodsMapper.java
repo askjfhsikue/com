@@ -3,9 +3,11 @@ package test.dao;
 import test.entity.TGoods;
 
 public interface TGoodsMapper {
-    int deleteByPrimaryKey(Integer goodsId);
+    boolean deleteByPrimaryKey(Integer goodsId);
 
-    int insert(TGoods record);
+    boolean deleteById(Integer goodsId);
+
+    boolean insert(TGoods record);
 
     int insertSelective(TGoods record);
 

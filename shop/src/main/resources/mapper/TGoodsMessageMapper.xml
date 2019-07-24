@@ -51,5 +51,9 @@
     from t_goods_message
     where goods_id=#{goodsId,jdbcType=INTEGER}
   </select>
+  <delete id="deleteMessageById" parameterType="java.lang.Integer">
+    delete from t_goods_message
+    WHERE goods_id=#{goodsId,jdbcType=INTEGER}
+  </delete>
 
 </mapper>
