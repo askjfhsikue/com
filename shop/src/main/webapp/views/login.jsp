@@ -126,7 +126,7 @@
                     console.log(data.state);
 
                     if (data.state == true) {
-                            window.location.href = "/user/test";
+                        window.location.href = "/user/test";
                     } else {
                         alert(data.message);
                     }
